@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CeLore Solutions</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <h2 class="logo">CeLore <small>DMS</small></h2>
+
+      <nav>
+        <a href="index.html" class="ativo">Home</a>
+        <a href="clientes.html">Clientes</a>
+        <a href="motos.html">Motos</a>
+        <a href="vendas.html">Vendas</a>
+      </nav>
+
+      <div class="rodape">
+        <strong>CeLore DMS</strong>
+        <small>Gestão de Motocicletas Elétricas</small>
+      </div>
+    </aside>
+
+    <main>
+      <header>
+        <div class="notification"><i data-lucide="bell"></i></div>
+        <div>
+          <div>AM</div>
+          <h2>Ana Maria</h2>
+          <h3>Administrador</h3>
+          <div><i></i></div>
+        </div>
+      </header>
+
+      <div><i data-lucide="user-pen"></i></div>
+      <h1>Cadastro de Clientes</h1>
+
+      <div>
+        <h2>Novo Cliente</h2>
+        <form id="formCliente">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nm_cliente">Nome Completo</label>
+              <input id="nm_cliente" name="nm_cliente" type="text" required />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="telefone_cliente">Telefone</label>
+              <input id="telefone_cliente" name="telefone_cliente" type="number" required />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="telefone_cliente">Tipo</label>
+              <select id="telefone_cliente" name="telefone_cliente">
+                <option value=""></option>
+                <option value="Comprador">Comprador</option>
+                <option value="Serviço">Serviço</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
