@@ -20,17 +20,6 @@
   let editingId = null;
   let toastTimer;
 
-  // Dados de demonstração usados apenas quando ainda não há registros salvos.
-  // Apague este bloco se preferir iniciar com a tabela vazia.
-  if (motorcycles === null) {
-    motorcycles = [
-      { id: createId(), model: "Voltz EV1 Sport", price: 13990, quantity: 5 },
-      { id: createId(), model: "Shineray SE3", price: 12490, quantity: 3 },
-      { id: createId(), model: "Watts W125", price: 21990, quantity: 2 }
-    ];
-    saveMotorcycles();
-  }
-
   function createId() {
     return (window.crypto && crypto.randomUUID)
       ? crypto.randomUUID()

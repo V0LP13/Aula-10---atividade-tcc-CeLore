@@ -1,73 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Celore Clientes</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <aside class="sidebar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celore Motos</title>
+    <link rel="stylesheet" href="css/stylecliente.css">
+</head>
+<body>
+        <aside class="sidebar">
       <h2 class="logo">CeLore <small>DMS</small></h2>
+
       <nav>
         <a href="index.html">Home</a>
         <a href="clientes.html" class="ativo">Clientes</a>
         <a href="motos.html">Motos</a>
         <a href="vendas.html">Vendas</a>
       </nav>
+
       <div class="rodape">
         <strong>CeLore DMS</strong>
         <small>Gestão de Motocicletas Elétricas</small>
       </div>
     </aside>
-    <main>
-      <header>
-        <div class="notification"><i data-lucide="bell"></i></div>
+<main class="main-content">
+      <section class="page-heading">
+        <div class="heading-icon"><i class="fa-solid fa-motorcycle"></i></div>
         <div>
-          <div>AM</div>
-          <h2>Ana Maria</h2>
-          <h3>Administrador</h3>
-          <div><i></i></div>
+          <h1>Cadastro de Clientes</h1>
+          <p>Cadastre e gerencie os clientes do seu negócio</p>
         </div>
-      </header>
-      <div><i data-lucide="user-pen"></i></div>
-      <h1>Cadastro de Clientes</h1>
-      <div>
-        <h2>Novo Cliente</h2>
-        <form id="formCliente">
+      </section>
+
+      <section class="panel form-panel">
+        <div class="panel-heading">
+          <h2 id="form-title">Nova Motocicleta</h2>
+          <p>Preencha os dados para adicionar um cliente ao banco.</p>
+        </div>
+
+        <form id="motorcycle-form">
           <div class="form-grid">
-            <div class="form-group">
-              <label for="nm_cliente">Nome Completo</label>
-              <input id="nm_cliente" name="nm_cliente" type="text" required />
+            <div class="form-field">
+              <label for="name">Nome Completo <span class="required">*</span></label>
+              <input id="name" name="name" type="text" placeholder="João Costa Silva" maxlength="90" required>
             </div>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="telefone_cliente">Telefone</label>
-              <input
-                id="telefone_cliente"
-                name="telefone_cliente"
-                type="number"
-                required
-              />
+            <div class="form-field">
+              <label for="number">Telefone <span class="required">*</span></label>
+              <input id="number" name="number" type="number" placeholder="Ex.: (11) 99999-9999"  maxlength="15" required>
             </div>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="telefone_cliente">Tipo</label>
-              <select id="telefone_cliente" name="telefone_cliente">
-                <option value=""></option>
-                <option value="Comprador">Comprador</option>
-                <option value="Serviço">Serviço</option>
+            <div class="form-field">
+              <label for="select">Tipo <span class="required">*</span></label>
+              <select name="select" id="select">
+                <option>Vendedor</option>
+                <option>Comprador</option>
+                <option>Serviço</option>
               </select>
             </div>
           </div>
+
+          <div class="form-actions">
+            <button class="btn btn-secondary hidden" type="button" id="cancel-edit">Cancelar edição</button>
+            <button class="btn btn-primary" type="submit" id="submit-button">
+              <i class="fa-solid fa-plus"></i><span>Cadastrar cliente</span>
+            </button>
+          </div>
+          <p class="form-note"><i class="fa-solid fa-circle-info"></i> Os campos com * são obrigatórios.</p>
         </form>
-      </div>
+      </section>
+
+      <section class="panel inventory-panel">
+        <div class="inventory-header">
+          <div>
+            <h2>Clientes cadastrados</h2>
+            <p>Total de clientes: <strong id="client-count">0</strong> <span class="muted">·</span>
+          </div>
+          <label class="search-box" for="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="search" type="search" placeholder="Buscar cliente..." autocomplete="off">
+          </label>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Numero</th>
+                <th>Tipo</th>
+                <th class="actions-heading">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="client-list"></tbody>
+          </table>
+          <div id="empty-state" class="empty-state hidden">
+            <span class="empty-icon"><i class="fa-solid fa-motorcycle"></i></span>
+            <strong>Nenhuma cliente encontrada</strong>
+            <p>Cadastre um cliente usando o formulário acima.</p>
+          </div>
+        </div>
+        <p class="storage-note"><i class="fa-solid fa-database"></i> Protótipo: os dados ficam salvos neste navegador. Para uso real com vários usuários, conecte a página a uma API e a um banco de dados.</p>
+      </section>
+
+      <footer class="page-footer">CeLore DMS <span>·</span> Gestão de Motocicletas Elétricas</footer>
     </main>
-    <script src="https://unpkg.com"></script>
-    <script>
-      lucide.createIcons();
-    </script>
-  </body>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="js/clientes.js"></script>t
+</body>
 </html>
