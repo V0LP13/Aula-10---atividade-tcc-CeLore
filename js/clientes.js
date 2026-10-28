@@ -73,6 +73,16 @@
     toastTimer = setTimeout(() => toast.classList.remove("show"), 2800);
   }
 
+  function formatPhone(value) {
+    const digits = String(value).replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 2) return digits ? `(${digits}` : "";
+
+    const areaCode = digits.slice(0, 2);
+    const phone = digits.slice(2);
+    if (phone.length <= 5) return `(${areaCode}) ${phone}`;
+    return `(${areaCode}) ${phone.slice(0, 5)}-${phone.slice(5)}`;
+  }
+
   function renderClients() {
     const query = searchInput.value.trim().toLocaleLowerCase("pt-BR");
     const filtered = clients.filter(client =>
@@ -87,11 +97,11 @@
       row.innerHTML = `
         <td>
           <div class="model-cell">
-            <span class="moto-mini-icon"><i class="fa-solid fa-motorcycle"></i></span>
+            <span class="moto-mini-icon"><i class="fa-solid fa-user"></i></span>
             <span>${escapeHTML(client.name)}</span>
           </div>
         </td>
-        <td>${escapeHTML(client.number)}</td>
+        <td>${escapeHTML(formatPhone(client.number))}</td>
         <td>${escapeHTML(client.type)}</td>
         <td>
           <div class="row-actions">
@@ -123,7 +133,7 @@
 
     editingId = id;
     nameInput.value = client.name;
-    numberInput.value = client.number;
+    numberInput.value = formatPhone(client.number);
     typeSelect.value = client.type;
     formTitle.textContent = "Editar Cliente";
     submitButton.innerHTML = '<i class="fa-solid fa-check"></i><span>Salvar alterações</span>';
@@ -131,6 +141,27 @@
     form.scrollIntoView({ behavior: "smooth", block: "start" });
     nameInput.focus({ preventScroll: true });
   }
+
+  numberInput.addEventListener("input", () => {
+    const digitsBeforeCaret = numberInput.value
+      .slice(0, numberInput.selectionStart)
+      .replace(/\D/g, "").length;
+    const formatted = formatPhone(numberInput.value);
+    numberInput.value = formatted;
+
+    let caretPosition = 0;
+    let digitsFound = 0;
+    while (caretPosition < formatted.length && digitsFound < digitsBeforeCaret) {
+      if (/\d/.test(formatted[caretPosition])) digitsFound += 1;
+      caretPosition += 1;
+    }
+    if (digitsBeforeCaret > 0) {
+      while (caretPosition < formatted.length && !/\d/.test(formatted[caretPosition])) {
+        caretPosition += 1;
+      }
+    }
+    numberInput.setSelectionRange(caretPosition, caretPosition);
+  });
 
   form.addEventListener("submit", event => {
     event.preventDefault();
@@ -144,8 +175,8 @@
       nameInput.focus();
       return;
     }
-    if (!/^[0-9()+\s.-]{8,20}$/.test(number)) {
-      showToast("Informe um número válido.");
+    if (!/^\(\d{2}\) \d{5}-\d{4}$/.test(number)) {
+      showToast("Informe o telefone no formato (11) 99999-9999.");
       numberInput.focus();
       return;
     }
